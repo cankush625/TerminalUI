@@ -3,7 +3,7 @@ import getpass
 from time import sleep
 
 from printHead.printHead import header
-from docker.webserver import confHttpd
+from docker.webserver import confHttpd, confRemoteHttpd
 from docker.python import confPython
 from hadoopCluster.hadoop import configure
 from aws.ec2_instance import launchInstance
@@ -20,6 +20,18 @@ passwd_ = 'autopy'
 while passwd != passwd_:
     if passwd != passwd_:
        passwd = getpass.getpass(" WRONG PASSWORD!! TRY AGAIN : ")
+
+os.system("tput setaf 4")
+print('''
+        1. Local
+        2. Remote
+        ''')
+os.system("tput setaf 7")
+location = int(input("Where do you want to run the command: "))
+
+if location == 2:
+    userName = input("Enter the remote system user name: ")
+    remoteIP = input("Enter the IP address of remote system: ")
 
 while True:
     header()
@@ -39,7 +51,10 @@ while True:
     # Output is displayed in green color
     if choice == 1:
         header()
-        confHttpd('centos')
+        if location == 1:
+            confHttpd('centos')
+        elif location == 2:
+            confRemoteHttpd('centos', userName, remoteIP)
     elif choice == 2:
         header()
         confPython()
