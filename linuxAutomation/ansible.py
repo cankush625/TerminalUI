@@ -1,6 +1,6 @@
 import os
 import subprocess as sp
-def linuxAuto():
+def AnsibleAutomation():
     print("User where would you like to configure ansible?[remote/local]")
     exe = input(" Enter your choice : ")
     if exe == "local":
@@ -74,4 +74,4 @@ def linuxAuto():
             mkdir = sp.getoutput("ssh root@{} mkdir /new_invent/".format(ip))
             move = sp.getoutput("scp {} root@{}:/new_invent/".format(inventory,ip))
             choice = input("Would You like to continue adding hosts?[Y/N] ")
-linuxAuto()
+AnsibleAutomation()
