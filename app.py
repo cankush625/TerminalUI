@@ -7,6 +7,7 @@ from linuxAutomation.configure_linux import configureLinux
 from docker.webserver import confHttpd, confRemoteHttpd
 from docker.python import confPython
 from hadoopCluster.hadoop import configure
+from kubernetesCluster.kubernetes_cluster import configure_kube_master_node
 from aws.ec2_instance import launchInstance
 from aws.ebs import createEbsVolume, attachEbsVolume
 from aws.s3 import uploadFileToBucket
@@ -42,8 +43,9 @@ while True:
             2. CONFIGURE WEBSERVER IN DOCKER CONTAINER
             3. CONFIGURE PYTHON IN DOCKER CONTAINER
             4. CONFIGURE HADOOP CLUSTER
-            5. HIGH AVAILABILITY ARCHITECTURE ON AWS
-            6. Exit
+            5. CONFIGURE KUBERNETES CLUSTER
+            6. HIGH AVAILABILITY ARCHITECTURE ON AWS
+            7. Exit
             ''')
     os.system("tput setaf 7")
 
@@ -68,6 +70,9 @@ while True:
         configure()
     elif choice == 5:
         header()
+        configure_kube_master_node()
+    elif choice == 6:
+        header()
         launchInstance()
         print("EC2 instance is being created...")
         sleep(60)
@@ -79,5 +84,5 @@ while True:
         print("File is being uploaded...")
         sleep(5)
         createDistribution()
-    elif choice == 6:
+    elif choice == 7:
         exit()
