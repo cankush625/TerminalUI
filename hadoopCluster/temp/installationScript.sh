@@ -1,5 +1,7 @@
 #!/bin/sh
-mkdir dn
+systemctl stop firewalld
+systemctl disable firewalld
+mkdir /data
 yum install python36 -y
 pip3 install gdown
 gdown --id 17UWQNVdBdGlyualwWX4Cc96KyZhD-lxz
