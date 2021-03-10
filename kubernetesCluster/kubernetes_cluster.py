@@ -2,11 +2,11 @@ import subprocess as sp
 from jinja2 import Environment, FileSystemLoader
 
 def configure_kube_master_playbook(pod_network_cidr, owner, group):
-    file_loader = FileSystemLoader('templates')
+    file_loader = FileSystemLoader('kubernetesCluster/templates')
     env = Environment(loader = file_loader)
     template = env.get_template('kube_master.yml.j2')
     output = template.render(pod_network_cidr = pod_network_cidr , owner = owner, group = group)
-    file = open("./temp/kube_master.yml", "w")
+    file = open("./kubernetesCluster/temp/kube_master.yml", "w")
     file.write("%s" %(output))
     file.close()
 
