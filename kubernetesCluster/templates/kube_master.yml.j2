@@ -1,0 +1,9 @@
+- hosts: kube_master
+  collections:
+    - cankush625.kubernetescluster
+
+  roles:
+    - role: kube_master
+      pod_network_cidr: {{ pod_network_cidr }}
+      owner: {{ owner }}
+      group: {{ group }}

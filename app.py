@@ -3,9 +3,11 @@ import getpass
 from time import sleep
 
 from printHead.printHead import header
+from linuxAutomation.configure_linux import configureLinux
 from docker.webserver import confHttpd, confRemoteHttpd
 from docker.python import confPython
 from hadoopCluster.hadoop import configure
+from kubernetesCluster.kubernetes_cluster import configure_kube_master_node
 from aws.ec2_instance import launchInstance
 from aws.ebs import createEbsVolume, attachEbsVolume
 from aws.s3 import uploadFileToBucket
@@ -37,11 +39,13 @@ while True:
     header()
     os.system("tput setaf 4")
     print('''
-            1. CONFIGURE WEBSERVER IN DOCKER CONTAINER
-            2. CONFIGURE PYTHON IN DOCKER CONTAINER
-            3. CONFIGURE HADOOP CLUSTER
-            4. HIGH AVAILABILITY ARCHITECTURE ON AWS
-            5. Exit
+            1. CONFIGURE LINUX
+            2. CONFIGURE WEBSERVER IN DOCKER CONTAINER
+            3. CONFIGURE PYTHON IN DOCKER CONTAINER
+            4. CONFIGURE HADOOP CLUSTER
+            5. CONFIGURE KUBERNETES CLUSTER
+            6. HIGH AVAILABILITY ARCHITECTURE ON AWS
+            7. Exit
             ''')
     os.system("tput setaf 7")
 
@@ -51,17 +55,23 @@ while True:
     # Output is displayed in green color
     if choice == 1:
         header()
+        configureLinux()
+    elif choice == 2:
+        header()
         if location == 1:
             confHttpd('centos')
         elif location == 2:
             confRemoteHttpd('centos', userName, remoteIP)
-    elif choice == 2:
-        header()
-        confPython()
     elif choice == 3:
         header()
-        configure()
+        confPython()
     elif choice == 4:
+        header()
+        configure()
+    elif choice == 5:
+        header()
+        configure_kube_master_node()
+    elif choice == 6:
         header()
         launchInstance()
         print("EC2 instance is being created...")
@@ -74,7 +84,5 @@ while True:
         print("File is being uploaded...")
         sleep(5)
         createDistribution()
-    elif choice == 5:
+    elif choice == 7:
         exit()
-
-
