@@ -4,6 +4,6 @@
 
   roles:
     - role: kube_master
-      pod_network_cidr: 10.0.240.0
+      pod_network_cidr: 10.240.10.0
       owner: ec2-user
       group: ec2-user

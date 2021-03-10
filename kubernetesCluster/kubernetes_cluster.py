@@ -1,5 +1,6 @@
 import subprocess as sp
 from jinja2 import Environment, FileSystemLoader
+import time
 
 def configure_kube_master_playbook(pod_network_cidr, owner, group):
     file_loader = FileSystemLoader('kubernetesCluster/templates')
@@ -15,4 +16,5 @@ def configure_kube_master_node():
     owner = input("Enter the owner: ")
     group = input("Enter the group: ")
     configure_kube_master_playbook(pod_network_cidr, owner, group)
-    sp.run("ansible-playbook kube-master.yml", shell=True)
+    sp.run("ansible-playbook ./kubernetesCluster/temp/kube_master.yml", shell=True)
+    time.sleep(500)
