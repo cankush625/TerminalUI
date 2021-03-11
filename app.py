@@ -70,7 +70,7 @@ while True:
         configure()
     elif choice == 5:
         header()
-        configure_kube_master_node()
+        configure_kube_cluster()
     elif choice == 6:
         header()
         launchInstance()

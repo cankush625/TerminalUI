@@ -1,0 +1,7 @@
+- hosts: kube_slave
+  collections:
+    - cankush625.kubernetescluster
+
+  roles:
+    - role: kube_slave
+      kube_join_command: "{{ kube_join_command }}"
