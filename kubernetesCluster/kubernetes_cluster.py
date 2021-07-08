@@ -43,7 +43,6 @@ def configure_kube_master_node():
     group = input("Enter the group: ")
     configure_kube_master_playbook(pod_network_cidr, owner, group)
     sp.run("ansible-playbook ./kubernetesCluster/temp/kube_master.yml", shell=True)
-    time.sleep(500)
 
 def configure_kube_slave_playbook(kube_join_command):
     file_loader = FileSystemLoader('kubernetesCluster/templates')
@@ -58,4 +57,3 @@ def configure_kube_slave_node():
     kube_join_command = input("Enter the kube join command: ")
     configure_kube_slave_playbook(kube_join_command)
     sp.run("ansible-playbook ./kubernetesCluster/temp/kube_slave.yml", shell=True)
-    time.sleep(500)
